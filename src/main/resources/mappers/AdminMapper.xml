@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.AdminMapper">
+
+    <resultMap id="AdminDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.Admin.AdminDTO">
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="type" column="type"/>
+        <result property="area" column="areaName"/>
+    </resultMap>
+
+    <resultMap id="AdminWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Admin.AdminWithID">
+        <id property="id" column="adminId"/>
+        <association property="admin" resultMap="AdminDTOMap"/>
+    </resultMap>
+
+    <select id="getAllAdminsWithArea" resultMap="AdminWithIdMap">
+        SELECT
+        a.adminId,
+        a.username,
+        a.password,
+        a.type,
+        ar.areaName
+        FROM admin a
+        LEFT JOIN area ar ON a.areaId = ar.areaId
+    </select>
+
+</mapper>
