@@ -1,5 +1,6 @@
 package com.odo.b2b.backend.ODO_B2B.model.MemberNotification;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
@@ -9,6 +10,7 @@ import lombok.*;
 @Data
 @ToString
 public class MemberNotificationDTO {
+    @JsonProperty("GST")
     private String GST;
     private String area;
     private String contact;

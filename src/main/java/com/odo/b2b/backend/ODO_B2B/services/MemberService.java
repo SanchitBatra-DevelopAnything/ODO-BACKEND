@@ -3,10 +3,15 @@ package com.odo.b2b.backend.ODO_B2B.services;
 import com.odo.b2b.backend.ODO_B2B.mapper.AreaMapper;
 import com.odo.b2b.backend.ODO_B2B.mapper.MemberMapper;
 import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationDTO;
+import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationWithID;
 import com.odo.b2b.backend.ODO_B2B.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberService {
@@ -41,6 +46,17 @@ public class MemberService {
         );
 
         return id;
+    }
+
+    public Map<String, MemberNotificationDTO> getAllNotifications() {
+        List<MemberNotificationWithID> records = memberMapper.getAllNotificationsWithArea();
+        Map<String, MemberNotificationDTO> responseMap = new LinkedHashMap<>();
+
+        for (MemberNotificationWithID record : records) {
+            responseMap.put(record.getId(), record.getNotification());
+        }
+
+        return responseMap;
     }
 
 }

@@ -5,6 +5,24 @@
 
 <mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.MemberMapper">
 
+
+    <resultMap id="NotificationDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationDTO">
+        <result property="GST" column="GST" />
+        <result property="area" column="areaName" />
+        <result property="contact" column="contact" />
+        <result property="name" column="name" />
+        <result property="shop" column="shop" />
+        <result property="shopAddress" column="shopAddress" />
+        <result property="deviceToken" column="deviceToken" />
+        <result property="latitude" column="latitude" />
+        <result property="longitude" column="longitude" />
+    </resultMap>
+
+    <resultMap id="NotificationWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationWithID">
+        <id property="id" column="notificationId"/>
+        <association property="notification" resultMap="NotificationDTOMap"/>
+    </resultMap>
+
     <insert id="insertNotification">
         INSERT INTO member_notification (
         notificationId,
@@ -30,5 +48,15 @@
         #{longitude}
         )
     </insert>
+
+
+
+    <select id="getAllNotificationsWithArea" resultMap="NotificationWithIdMap">
+        SELECT
+        n.notificationId, n.GST, n.contact, n.name, n.shop, n.shopAddress,
+        n.deviceToken, n.latitude, n.longitude, a.areaName
+        FROM member_notification n
+        LEFT JOIN area a ON n.areaId = a.areaId;
+    </select>
 
 </mapper>

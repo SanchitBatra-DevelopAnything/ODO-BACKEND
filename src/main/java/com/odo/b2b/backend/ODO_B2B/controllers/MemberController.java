@@ -18,11 +18,19 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping("/notification")
+    @PostMapping("/notifications")
     public ResponseEntity<Map<String, String>> addNotification(@RequestBody MemberNotificationDTO dto) {
+        System.out.println("GST received: " + dto.getGST());
         String id = memberService.createNotification(dto);
         Map<String, String> response = new HashMap<>();
         response.put("name", id);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/notifications")
+    public ResponseEntity<Map<String , MemberNotificationDTO>> getAllNotifications()
+    {
+        Map<String, MemberNotificationDTO> response = memberService.getAllNotifications();
+        return ResponseEntity.ok(response);
     }
 }
