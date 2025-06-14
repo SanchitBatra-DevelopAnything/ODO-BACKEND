@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.AreaMapper">
+
+    <select id="findAreaIdByName" resultType="string">
+        SELECT areaId FROM area WHERE areaName = #{areaName}
+    </select>
+
+</mapper>

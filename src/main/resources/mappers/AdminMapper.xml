@@ -28,4 +28,9 @@
         LEFT JOIN area ar ON a.areaId = ar.areaId
     </select>
 
+    <insert id="insertAdmin">
+        INSERT INTO admin (adminId, username, password, type, areaId)
+        VALUES (#{id}, #{username}, #{password}, #{type}, #{areaId})
+    </insert>
+
 </mapper>
