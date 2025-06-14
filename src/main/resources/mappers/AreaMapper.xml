@@ -9,4 +9,21 @@
         SELECT areaId FROM area WHERE areaName = #{areaName}
     </select>
 
+    <resultMap id="AreaDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.Area.AreaDTO">
+        <result property="areaName" column="areaName"/>
+    </resultMap>
+
+    <resultMap id="AreaWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Area.AreaWithID">
+        <id property="id" column="areaId"/>
+        <association property="area" resultMap="AreaDTOMap"/>
+    </resultMap>
+
+    <select id="getAllAreas" resultMap="AreaWithIdMap">
+        SELECT areaId, areaName FROM area
+    </select>
+
+    <delete id="deleteAreaById" parameterType="string">
+        DELETE FROM area WHERE areaId = #{areaId}
+    </delete>
+
 </mapper>
