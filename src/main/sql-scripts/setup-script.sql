@@ -1,4 +1,3 @@
-show databases;
 create database ODO;
 use ODO;
 
@@ -20,11 +19,19 @@ CREATE TABLE Admin (
         ON UPDATE CASCADE
 );
 
-INSERT INTO Area (areaId, areaName) VALUES (UUID(), 'bulandshehar');
-
-select * from area;
-
-INSERT INTO Admin (adminId, username, password, type, areaId)
-VALUES (UUID(), 'gandharvch', 'odo@admin', 'Sub', 'c85c45aa-4888-11f0-8029-19ac1666c193');
-
-SELECT a.adminId, a.username, a.password, a.type,ar.areaName FROM admin a LEFT JOIN area ar ON a.areaId = ar.areaId;
+-- Table 2: member_notification
+CREATE TABLE member_notification (
+    notificationId CHAR(36) PRIMARY KEY,
+    GST VARCHAR(255),
+    areaId CHAR(36),
+    contact VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    shop VARCHAR(100) NOT NULL,
+    shopAddress VARCHAR(255) NOT NULL,
+    deviceToken TEXT,
+    latitude VARCHAR(50),
+    longitude VARCHAR(50),
+    FOREIGN KEY (areaId) REFERENCES Area(areaId)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
