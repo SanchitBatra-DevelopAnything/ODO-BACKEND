@@ -29,6 +29,13 @@ public class AdminService {
                 .collect(Collectors.toMap(AdminWithID::getId, AdminWithID::getAdmin));
     }
 
+    public void deleteSubAdminById(String subAdminId) {
+        int deleted = adminMapper.deleteSubAdminById(subAdminId);
+        if (deleted == 0) {
+            throw new RuntimeException("Admin data not found or already deleted for id : " + subAdminId);
+        }
+    }
+
     @Transactional
     public String addSubAdmin(AdminDTO payload){
         if("Sub".equalsIgnoreCase(payload.getType()))

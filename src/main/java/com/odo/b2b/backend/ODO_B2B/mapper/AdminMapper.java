@@ -13,4 +13,6 @@ public interface AdminMapper {
                      @Param("password") String password,
                      @Param("type") String type,
                      @Param("areaId") String areaId);
+
+    int deleteSubAdminById(@Param("subAdminId") String subAdminId);
 }

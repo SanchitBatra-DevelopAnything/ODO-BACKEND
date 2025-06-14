@@ -33,4 +33,8 @@
         VALUES (#{id}, #{username}, #{password}, #{type}, #{areaId})
     </insert>
 
+    <delete id="deleteSubAdminById" parameterType="string">
+        DELETE FROM admin WHERE adminId = #{subAdminId}
+    </delete>
+
 </mapper>

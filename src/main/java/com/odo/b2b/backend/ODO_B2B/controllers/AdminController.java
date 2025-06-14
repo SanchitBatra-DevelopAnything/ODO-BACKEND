@@ -31,4 +31,11 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @DeleteMapping("/{adminId}")
+    public ResponseEntity<Void> deleteSubAdmin(@PathVariable String adminId)
+    {
+        adminService.deleteSubAdminById(adminId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
