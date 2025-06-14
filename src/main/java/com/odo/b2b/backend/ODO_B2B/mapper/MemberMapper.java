@@ -1,5 +1,7 @@
 package com.odo.b2b.backend.ODO_B2B.mapper;
 
+import com.odo.b2b.backend.ODO_B2B.model.Member.MemberWithID;
+import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationDTO;
 import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationWithID;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +22,11 @@ public interface MemberMapper {
     List<MemberNotificationWithID> getAllNotificationsWithArea();
 
     int deleteMemberNotification(@Param("notificationId") String notificationId);
+
+    void insertMember(@Param("memberId") String memberId,
+                      @Param("dto") MemberNotificationDTO dto);
+
+    List<MemberWithID> getAllMembers();
+
+    void deleteMember(@Param("memberId") String memberId);
 }

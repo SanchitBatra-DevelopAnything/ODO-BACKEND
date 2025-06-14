@@ -23,6 +23,24 @@
         <association property="notification" resultMap="NotificationDTOMap"/>
     </resultMap>
 
+    <resultMap id="MemberDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationDTO">
+        <result property="GST" column="GST"/>
+        <result property="area" column="areaName"/>
+        <result property="contact" column="contact"/>
+        <result property="name" column="name"/>
+        <result property="shop" column="shop"/>
+        <result property="shopAddress" column="shopAddress"/>
+        <result property="deviceToken" column="deviceToken"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+    </resultMap>
+
+    <resultMap id="MemberWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Member.MemberWithID">
+        <id property="memberId" column="memberId"/>
+        <association property="member" resultMap="MemberDTOMap"/>
+    </resultMap>
+
+
     <insert id="insertNotification">
         INSERT INTO member_notification (
         notificationId,
@@ -61,6 +79,30 @@
 
     <delete id="deleteMemberNotification" parameterType="string">
         DELETE FROM member_notification WHERE notificationId = #{notificationId}
+    </delete>
+
+    <insert id="insertMember">
+        INSERT INTO member (
+        memberId, GST, areaId, contact, name, shop, shopAddress,
+        deviceToken, latitude, longitude
+        )
+        VALUES (
+        #{memberId}, #{dto.GST},
+        (SELECT areaId FROM area WHERE areaName = #{dto.area}),
+        #{dto.contact}, #{dto.name}, #{dto.shop}, #{dto.shopAddress},
+        #{dto.deviceToken}, #{dto.latitude}, #{dto.longitude}
+        )
+    </insert>
+
+    <select id="getAllMembers" resultMap="MemberWithIdMap">
+        SELECT m.memberId, m.GST, a.areaName, m.contact, m.name,
+        m.shop, m.shopAddress, m.deviceToken, m.latitude, m.longitude
+        FROM member m
+        LEFT JOIN area a ON m.areaId = a.areaId
+    </select>
+
+    <delete id="deleteMember">
+        DELETE FROM member WHERE memberId = #{memberId}
     </delete>
 
 </mapper>

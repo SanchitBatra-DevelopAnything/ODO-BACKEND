@@ -2,6 +2,7 @@ package com.odo.b2b.backend.ODO_B2B.services;
 
 import com.odo.b2b.backend.ODO_B2B.mapper.AreaMapper;
 import com.odo.b2b.backend.ODO_B2B.mapper.MemberMapper;
+import com.odo.b2b.backend.ODO_B2B.model.Member.MemberWithID;
 import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationDTO;
 import com.odo.b2b.backend.ODO_B2B.model.MemberNotification.MemberNotificationWithID;
 import com.odo.b2b.backend.ODO_B2B.util.UUIDGenerator;
@@ -65,6 +66,25 @@ public class MemberService {
         if (deleted == 0) {
             throw new RuntimeException("Member Notification not found or already deleted: " + notificationId);
         }
+    }
+
+    public String addMember(MemberNotificationDTO dto) {
+        String id = new UUIDGenerator().generateUUID();
+        memberMapper.insertMember(id, dto);
+        return id;
+    }
+
+    public Map<String, MemberNotificationDTO> getAllMembers() {
+        List<MemberWithID> members = memberMapper.getAllMembers();
+        Map<String, MemberNotificationDTO> response = new LinkedHashMap<>();
+        for (MemberWithID member : members) {
+            response.put(member.getMemberId(), member.getMember());
+        }
+        return response;
+    }
+
+    public void deleteMember(String memberId) {
+        memberMapper.deleteMember(memberId);
     }
 
 }

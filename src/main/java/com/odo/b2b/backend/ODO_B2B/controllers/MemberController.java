@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,5 +40,24 @@ public class MemberController {
     {
         memberService.deleteMemberNotification(notificationId);
         return ResponseEntity.noContent().build();
+    }
+
+    //as memberDTO is same as MemberNotificationDTO , we are re-using the same class.
+
+    @PostMapping
+    public ResponseEntity<Map<String, String>> addMember(@RequestBody MemberNotificationDTO dto) {
+        String id = memberService.addMember(dto);
+        return ResponseEntity.ok(Collections.singletonMap("name", id));
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String, MemberNotificationDTO>> getAllMembers() {
+        return ResponseEntity.ok(memberService.getAllMembers());
+    }
+
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<Void> deleteMember(@PathVariable String memberId) {
+        memberService.deleteMember(memberId);
+        return ResponseEntity.ok().build();
     }
 }
