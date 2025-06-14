@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface AreaMapper {
     String findAreaIdByName(@Param("areaName") String areaName);
+
     List<AreaWithID> getAllAreas();
+
     int deleteAreaById(@Param("areaId") String areaId);
+
+    void insertArea(@Param("id") String id,
+                     @Param("areaName") String areaName);
 }
