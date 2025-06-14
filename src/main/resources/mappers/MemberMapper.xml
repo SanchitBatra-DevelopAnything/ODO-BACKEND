@@ -59,4 +59,8 @@
         LEFT JOIN area a ON n.areaId = a.areaId;
     </select>
 
+    <delete id="deleteMemberNotification" parameterType="string">
+        DELETE FROM member_notification WHERE notificationId = #{notificationId}
+    </delete>
+
 </mapper>

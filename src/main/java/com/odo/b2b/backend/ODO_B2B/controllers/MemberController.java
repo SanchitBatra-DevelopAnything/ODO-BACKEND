@@ -33,4 +33,11 @@ public class MemberController {
         Map<String, MemberNotificationDTO> response = memberService.getAllNotifications();
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/notifications/{notificationId}")
+    public ResponseEntity<Void> deleteNotification(@PathVariable String notificationId)
+    {
+        memberService.deleteMemberNotification(notificationId);
+        return ResponseEntity.noContent().build();
+    }
 }

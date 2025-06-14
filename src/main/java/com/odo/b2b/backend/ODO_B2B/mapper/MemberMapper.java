@@ -18,4 +18,6 @@ public interface MemberMapper {
                             @Param("longitude") String longitude);
 
     List<MemberNotificationWithID> getAllNotificationsWithArea();
+
+    int deleteMemberNotification(@Param("notificationId") String notificationId);
 }

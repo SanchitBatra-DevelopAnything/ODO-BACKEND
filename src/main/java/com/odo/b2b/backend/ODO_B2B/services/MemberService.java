@@ -59,4 +59,12 @@ public class MemberService {
         return responseMap;
     }
 
+    public void deleteMemberNotification(String notificationId)
+    {
+        int deleted = memberMapper.deleteMemberNotification(notificationId);
+        if (deleted == 0) {
+            throw new RuntimeException("Member Notification not found or already deleted: " + notificationId);
+        }
+    }
+
 }
