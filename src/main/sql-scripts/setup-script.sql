@@ -51,3 +51,15 @@ CREATE TABLE member (
         ON DELETE SET NULL
         ON UPDATE CASCADE
 );
+
+
+
+
+CREATE TABLE brand (
+    brandId CHAR(36) PRIMARY KEY,
+    brandName VARCHAR(255),
+    imageUrl TEXT,
+    sortOrder INT
+);
+
+
