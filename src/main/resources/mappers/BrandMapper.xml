@@ -5,9 +5,24 @@
 
 <mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.BrandMapper">
 
+    <resultMap id="BrandDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.Brand.BrandDTO">
+        <result property="brandName" column="brandName"/>
+        <result property="imageUrl" column="imageUrl"/>
+        <result property="sortOrder" column="sortOrder"/>
+    </resultMap>
+
+    <resultMap id="BrandWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Brand.BrandWithID">
+        <id property="id" column="brandId"/>
+        <association property="brand" resultMap="BrandDTOMap"/>
+    </resultMap>
+
     <insert id="insertBrand">
         INSERT INTO brand (brandId, brandName, imageUrl, sortOrder)
         VALUES (#{brandId}, #{dto.brandName}, #{dto.imageUrl}, NULL)
     </insert>
+
+    <select id="getAllBrands" resultMap="BrandWithIdMap">
+        SELECT * FROM brand
+    </select>
 
 </mapper>
