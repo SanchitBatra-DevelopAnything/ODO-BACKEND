@@ -37,4 +37,10 @@ public class BrandController {
         }
         return ResponseEntity.ok(brandMap);
     }
+
+    @PutMapping("/sortOrder")
+    public ResponseEntity<Map<String, BrandDTO>> updateSortOrders(@RequestBody Map<String, BrandDTO> brands) {
+        Map<String, BrandDTO> updatedBrands = brandService.updateSortOrders(brands);
+        return ResponseEntity.ok(updatedBrands);
+    }
 }

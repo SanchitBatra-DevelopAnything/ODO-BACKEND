@@ -25,4 +25,19 @@
         SELECT * FROM brand
     </select>
 
+    <update id="bulkUpdateSortOrders">
+        UPDATE brand
+        SET sortOrder = CASE brandId
+        <foreach collection="brands" item="b">
+            WHEN #{b.id} THEN #{b.brand.sortOrder}
+        </foreach>
+        END
+        WHERE brandId IN
+        <foreach collection="brands" item="b" open="(" separator="," close=")">
+            #{b.id}
+        </foreach>
+    </update>
+
+
+
 </mapper>
