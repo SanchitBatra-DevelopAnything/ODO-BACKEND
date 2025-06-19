@@ -24,7 +24,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("brand/{brandId}")
+    @GetMapping("/brand/{brandId}")
     public ResponseEntity<Map<String , ItemDTO>> fetchAllItemOfBrand(@PathVariable("brandId") String brandID)
     {
         List<ItemWithID> items = itemService.getAllItemsOfBrand(brandID);
