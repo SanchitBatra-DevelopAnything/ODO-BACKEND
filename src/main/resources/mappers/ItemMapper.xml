@@ -5,6 +5,36 @@
 
 <mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.ItemMapper">
 
+    <resultMap id="ItemDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.Item.ItemDTO">
+        <result property="imgUrl" column="imgUrl"/>
+        <result property="itemName" column="itemName"/>
+        <result property="itemPrice" column="itemPrice"/>
+        <result property="itemPriceGST" column="itemPriceGST"/>
+        <result property="slab_1_discount" column="slab1Discount"/>
+        <result property="slab_2_discount" column="slab2Discount"/>
+        <result property="slab_3_discount" column="slab3Discount"/>
+        <result property="slab_1_start" column="slab1Start"/>
+        <result property="slab_1_end" column="slab1End"/>
+        <result property="slab_2_start" column="slab2Start"/>
+        <result property="slab_2_end" column="slab2End"/>
+        <result property="slab_3_start" column="slab3Start"/>
+        <result property="slab_3_end" column="slab3End"/>
+        <result property="brandId" column="brandId"/>
+        <result property="categoryId" column="categoryId"/>
+    </resultMap>
+
+    <resultMap id="ItemWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Item.ItemWithID">
+        <id property="id" column="itemId"/>
+        <association property="item" resultMap="ItemDTOMap"/>
+    </resultMap>
+
+    <select id="getAllItemsOfBrand" parameterType="string" resultMap="ItemWithIdMap">
+        SELECT * from item where brandId = #{brandId}
+    </select>
+
+
+
+
     <insert id="insertItem" parameterType="map">
         INSERT INTO item (
         itemId, imgUrl, itemName, itemPrice, itemPriceGST,

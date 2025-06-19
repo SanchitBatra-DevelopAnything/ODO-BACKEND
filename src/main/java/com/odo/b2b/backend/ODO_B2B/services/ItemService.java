@@ -1,13 +1,14 @@
 package com.odo.b2b.backend.ODO_B2B.services;
 
 import com.odo.b2b.backend.ODO_B2B.mapper.ItemMapper;
-import com.odo.b2b.backend.ODO_B2B.model.Area.AreaDTO;
 import com.odo.b2b.backend.ODO_B2B.model.Item.ItemDTO;
+import com.odo.b2b.backend.ODO_B2B.model.Item.ItemWithID;
 import com.odo.b2b.backend.ODO_B2B.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,6 +24,11 @@ public class ItemService {
         if (deleted == 0) {
             throw new RuntimeException("Item not found or already deleted: " + itemId);
         }
+    }
+
+    public List<ItemWithID> getAllItemsOfBrand(String brandId)
+    {
+        return itemMapper.getAllItemsOfBrand(brandId);
     }
 
 
