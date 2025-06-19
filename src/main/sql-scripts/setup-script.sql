@@ -62,4 +62,24 @@ CREATE TABLE brand (
     sortOrder INT
 );
 
+CREATE TABLE item (
+    itemId CHAR(36) PRIMARY KEY,
+    imgUrl TEXT NOT NULL,
+    itemName VARCHAR(255) NOT NULL,
+    itemPrice DOUBLE NOT NULL,
+    itemPriceGST DOUBLE NOT NULL,
+
+    slab1Discount DOUBLE,
+    slab1Start DOUBLE,
+    slab1End DOUBLE,
+
+    slab2Discount DOUBLE,
+    slab2Start DOUBLE,
+    slab2End DOUBLE,
+
+    slab3Discount DOUBLE,
+    slab3Start DOUBLE,
+    slab3End DOUBLE
+);
+
 
