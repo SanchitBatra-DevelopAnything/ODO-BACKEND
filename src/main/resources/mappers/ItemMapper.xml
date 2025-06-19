@@ -21,5 +21,9 @@
         )
     </insert>
 
+    <delete id="deleteItemById" parameterType="string">
+        DELETE FROM item WHERE itemId = #{itemId}
+    </delete>
+
 
 </mapper>

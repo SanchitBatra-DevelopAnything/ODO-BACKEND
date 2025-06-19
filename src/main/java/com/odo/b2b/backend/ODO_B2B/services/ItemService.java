@@ -17,6 +17,14 @@ public class ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
+    public void deleteItemById(String itemId)
+    {
+        int deleted = itemMapper.deleteItemById(itemId);
+        if (deleted == 0) {
+            throw new RuntimeException("Item not found or already deleted: " + itemId);
+        }
+    }
+
 
     public String addItem(ItemDTO itemDTO){
         String itemId = new UUIDGenerator().generateUUID();

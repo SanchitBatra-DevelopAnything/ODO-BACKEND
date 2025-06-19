@@ -27,4 +27,10 @@ public class ItemController {
         response.put("name", id);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @DeleteMapping("/{itemId}")
+    public ResponseEntity<Void> deleteArea(@PathVariable String itemId) {
+        itemService.deleteItemById(itemId);
+        return ResponseEntity.noContent().build(); // returns status 204 and null body
+    }
 }
