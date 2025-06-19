@@ -34,6 +34,5 @@ public class AreaService {
             String areaId = new UUIDGenerator().generateUUID();
             areaMapper.insertArea(areaId ,payload.getAreaName());
             return areaId;
-
     }
 }
