@@ -62,6 +62,12 @@ CREATE TABLE brand (
     sortOrder INT
 );
 
+CREATE TABLE category (
+    categoryId CHAR(36) PRIMARY KEY,
+    categoryName VARCHAR(255),
+    imageUrl TEXT
+);
+
 CREATE TABLE item (
     itemId CHAR(36) PRIMARY KEY,
     imgUrl TEXT NOT NULL,
@@ -79,7 +85,12 @@ CREATE TABLE item (
 
     slab3Discount DOUBLE,
     slab3Start DOUBLE,
-    slab3End DOUBLE
+    slab3End DOUBLE,
+
+    brandId CHAR(36),
+    categoryId CHAR(36),
+    CONSTRAINT fk_brand FOREIGN KEY (brandId) REFERENCES brand(brandId) ON DELETE SET NULL,
+    CONSTRAINT fk_category FOREIGN KEY (categoryId) REFERENCES category(categoryId) ON DELETE SET NULL
 );
 
 
