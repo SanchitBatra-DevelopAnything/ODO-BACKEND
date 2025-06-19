@@ -35,6 +35,19 @@ public class ItemService {
     public String addItem(ItemDTO itemDTO){
         String itemId = new UUIDGenerator().generateUUID();
 
+        Map<String , Object> param = getItemParamMap(itemId , itemDTO);
+        itemMapper.insertItem(param);
+        return itemId;
+    }
+
+    public void updateItem(String itemId , ItemDTO payload)
+    {
+        Map<String , Object> param = getItemParamMap(itemId , payload);
+        itemMapper.updateItem(param);
+    }
+
+    private Map<String , Object> getItemParamMap(String itemId , ItemDTO itemDTO)
+    {
         Map<String, Object> param = new HashMap<>();
         param.put("itemId", itemId);
         param.put("imgUrl", itemDTO.getImgUrl());
@@ -59,7 +72,6 @@ public class ItemService {
         param.put("brandId", itemDTO.getBrandId());
         param.put("categoryId" , itemDTO.getCategoryId());
 
-        itemMapper.insertItem(param);
-        return itemId;
+        return param;
     }
 }

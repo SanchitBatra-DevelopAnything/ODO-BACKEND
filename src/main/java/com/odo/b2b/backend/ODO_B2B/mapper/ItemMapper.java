@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface ItemMapper {
     void insertItem(Map<String , Object> param);
+    void updateItem(Map<String , Object> param);
     int deleteItemById(@Param("itemId") String itemId);
     List<ItemWithID> getAllItemsOfBrand(@Param("brandId") String brandId);
 }

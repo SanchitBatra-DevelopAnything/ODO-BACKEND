@@ -51,6 +51,28 @@
         )
     </insert>
 
+    <update id="updateItem" parameterType="map">
+        UPDATE item
+        SET
+        imgUrl = #{imgUrl},
+        itemName = #{itemName},
+        itemPrice = #{itemPrice},
+        itemPriceGST = #{itemPriceGST},
+        slab1Discount = #{slab_1_discount},
+        slab1Start = #{slab_1_start},
+        slab1End = #{slab_1_end},
+        slab2Discount = #{slab_2_discount},
+        slab2Start = #{slab_2_start},
+        slab2End = #{slab_2_end},
+        slab3Discount = #{slab_3_discount},
+        slab3Start = #{slab_3_start},
+        slab3End = #{slab_3_end},
+        brandId = #{brandId},
+        categoryId = #{categoryId}
+        WHERE
+        itemId = #{itemId}
+    </update>
+
     <delete id="deleteItemById" parameterType="string">
         DELETE FROM item WHERE itemId = #{itemId}
     </delete>

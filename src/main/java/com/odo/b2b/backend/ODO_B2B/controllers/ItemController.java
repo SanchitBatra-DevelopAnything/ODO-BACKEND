@@ -1,7 +1,5 @@
 package com.odo.b2b.backend.ODO_B2B.controllers;
 
-import com.odo.b2b.backend.ODO_B2B.model.Area.AreaDTO;
-import com.odo.b2b.backend.ODO_B2B.model.Area.AreaWithID;
 import com.odo.b2b.backend.ODO_B2B.model.Item.ItemDTO;
 import com.odo.b2b.backend.ODO_B2B.model.Item.ItemWithID;
 import com.odo.b2b.backend.ODO_B2B.services.ItemService;
@@ -50,5 +48,12 @@ public class ItemController {
     public ResponseEntity<Void> deleteArea(@PathVariable String itemId) {
         itemService.deleteItemById(itemId);
         return ResponseEntity.noContent().build(); // returns status 204 and null body
+    }
+
+    @PutMapping("/{itemId}")
+    public ResponseEntity<ItemDTO> updateItem(@PathVariable String itemId , @RequestBody ItemDTO payload)
+    {
+        itemService.updateItem(itemId , payload);
+        return ResponseEntity.ok(payload);
     }
 }
