@@ -34,7 +34,6 @@ public class ItemService {
 
     public String addItem(ItemDTO itemDTO){
         String itemId = new UUIDGenerator().generateUUID();
-
         Map<String , Object> param = getItemParamMap(itemId , itemDTO);
         itemMapper.insertItem(param);
         return itemId;
