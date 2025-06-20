@@ -35,7 +35,7 @@ public class ItemController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping
+    @PostMapping("/brand/{brandId}")
     public ResponseEntity<Map<String , String>> addItem(@RequestBody ItemDTO payload)
     {
         String id = itemService.addItem(payload);
