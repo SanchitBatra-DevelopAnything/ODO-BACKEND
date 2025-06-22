@@ -19,15 +19,7 @@ CREATE TABLE Admin (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE cart (
-    cartId CHAR(36) PRIMARY KEY,
-    memberId CHAR(36) NOT NULL,
 
-    CONSTRAINT fk_member
-        FOREIGN KEY (memberId)
-        REFERENCES member(memberId)
-        ON DELETE CASCADE
-);
 
 -- Table 2: member_notification
 CREATE TABLE member_notification (
@@ -101,6 +93,16 @@ CREATE TABLE item (
     categoryId CHAR(36),
     CONSTRAINT fk_brand FOREIGN KEY (brandId) REFERENCES brand(brandId) ON DELETE SET NULL,
     CONSTRAINT fk_category FOREIGN KEY (categoryId) REFERENCES category(categoryId) ON DELETE SET NULL
+);
+
+CREATE TABLE cart (
+    cartId CHAR(36) PRIMARY KEY,
+    memberId CHAR(36) NOT NULL,
+
+    CONSTRAINT fk_member
+        FOREIGN KEY (memberId)
+        REFERENCES member(memberId)
+        ON DELETE CASCADE
 );
 
 
