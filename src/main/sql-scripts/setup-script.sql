@@ -105,4 +105,24 @@ CREATE TABLE cart (
         ON DELETE CASCADE
 );
 
+CREATE TABLE cart_item (
+    cartItemId CHAR(36) PRIMARY KEY,
+    cartId CHAR(36) NOT NULL,
+    itemId CHAR(36) NOT NULL,
+    quantity INT NOT NULL,
+    price DOUBLE NOT NULL,
+    discountPercentage DOUBLE DEFAULT 0,
+    totalPriceAfterDiscount DOUBLE,
+
+    CONSTRAINT fk_cart
+        FOREIGN KEY (cartId)
+        REFERENCES cart(cartId)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_item
+        FOREIGN KEY (itemId)
+        REFERENCES item(itemId)
+        ON DELETE CASCADE
+);
+
 
