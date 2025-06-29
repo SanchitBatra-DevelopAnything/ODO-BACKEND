@@ -38,7 +38,6 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Map<String , String>> addItem(@RequestBody ItemDTO payload)
     {
-        System.out.println(payload);
         String id = itemService.addItem(payload);
         Map<String, String> response = new HashMap<>();
         response.put("name", id);
@@ -46,7 +45,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/{itemId}")
-    public ResponseEntity<Void> deleteArea(@PathVariable String itemId) {
+    public ResponseEntity<Void> deleteItem(@PathVariable String itemId) {
         itemService.deleteItemById(itemId);
         return ResponseEntity.noContent().build(); // returns status 204 and null body
     }

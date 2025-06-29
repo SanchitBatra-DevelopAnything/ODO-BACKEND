@@ -12,4 +12,5 @@ public interface ItemMapper {
     int deleteItemById(@Param("itemId") String itemId);
     List<ItemWithID> getAllItemsOfBrand(@Param("brandId") String brandId);
     void insertAreaSlabForItem(Map<String , Object> param);
+    void deleteAreaSlabs(String itemId);
 }

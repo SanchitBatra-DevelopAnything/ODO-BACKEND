@@ -53,10 +53,28 @@ public class ItemService {
         return itemId;
     }
 
+    @Transactional
     public void updateItem(String itemId , ItemDTO payload)
     {
         Map<String , Object> param = getItemParamMap(itemId , payload);
+        //updateItem in item table.
         itemMapper.updateItem(param);
+
+        //delete all areaSlabs for item as they can now use default and need to be deleted.
+        itemMapper.deleteAreaSlabs(itemId);
+
+        //re-insert new slabs with this request.
+        if(payload.getAreaSlabs()!=null && payload.getAreaSlabs().size()!=0)
+        {
+            //area wise slabs are given for this item , hence add it.
+            for(String areaName : payload.getAreaSlabs().keySet())
+            {
+                if(payload.getAreaSlabs().get(areaName)!=null) {
+                    Map<String , Object> areaSlabParam = getAreaSlabParamMap(itemId , payload.getAreaSlabs().get(areaName));
+                    itemMapper.insertAreaSlabForItem(areaSlabParam);
+                }
+            }
+        }
     }
 
     private Map<String , Object> getItemParamMap(String itemId , ItemDTO itemDTO)

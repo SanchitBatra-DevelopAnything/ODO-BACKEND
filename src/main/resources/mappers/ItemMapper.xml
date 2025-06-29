@@ -87,5 +87,9 @@
         DELETE FROM item WHERE itemId = #{itemId}
     </delete>
 
+    <delete id="deleteAreaSlabs" parameterType="string">
+        DELETE FROM area_slab_item WHERE itemId = #{itemId}
+    </delete>
+
 
 </mapper>
