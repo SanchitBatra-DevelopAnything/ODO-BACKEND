@@ -1,7 +1,9 @@
 package com.odo.b2b.backend.ODO_B2B.model.Item;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -30,6 +32,11 @@ public class ItemDTO {
 
     private String brandId;
     private String categoryId;
+
+    //for reading request
     private Map<String,AreaWiseSlabData> areaSlabs;
 
+    //for forming response with areaName , it sets the areaSlabs.
+    @JsonIgnore
+    private List<AreaWiseSlabData> areaWiseSlabData;
 }

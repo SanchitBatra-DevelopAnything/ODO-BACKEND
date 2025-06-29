@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ItemService {
@@ -30,7 +27,29 @@ public class ItemService {
 
     public List<ItemWithID> getAllItemsOfBrand(String brandId)
     {
-        return itemMapper.getAllItemsOfBrand(brandId);
+        List<ItemWithID> rawList = itemMapper.getAllItemsOfBrand(brandId);
+        setAreaWiseSlabDataMap(rawList);
+        return rawList;
+    }
+
+    private void setAreaWiseSlabDataMap(List<ItemWithID> rawList)
+    {
+        for(ItemWithID itemWithID:rawList)
+        {
+            Map<String , AreaWiseSlabData> result = new HashMap<>();
+            if(itemWithID!=null && itemWithID.getItem()!=null && itemWithID.getItem().getAreaWiseSlabData()!=null)
+            {
+                List<AreaWiseSlabData> slabsDataFromDB = itemWithID.getItem().getAreaWiseSlabData();
+                for(AreaWiseSlabData slabInDB : slabsDataFromDB)
+                {
+                    if(slabInDB.getAreaId()!=null && slabInDB.getAreaName()!=null)
+                    {
+                        result.put(slabInDB.getAreaName().toLowerCase().trim(), slabInDB);
+                    }
+                }
+            }
+            itemWithID.getItem().setAreaSlabs(result);
+        }
     }
 
 

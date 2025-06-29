@@ -5,22 +5,39 @@
 
 <mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.ItemMapper">
 
+    <resultMap id="AreaWiseSlabMap" type="com.odo.b2b.backend.ODO_B2B.model.Item.AreaWiseSlabData">
+        <result property="areaName" column="areaName"/>
+        <result property="areaId" column="areaId"/>
+        <result property="slab_1_discount" column="slab_1_discount_area"/>
+        <result property="slab_2_discount" column="slab_2_discount_area"/>
+        <result property="slab_3_discount" column="slab_3_discount_area"/>
+        <result property="slab_1_start" column="slab_1_start_area"/>
+        <result property="slab_1_end" column="slab_1_end_area"/>
+        <result property="slab_2_start" column="slab_2_start_area"/>
+        <result property="slab_2_end" column="slab_2_end_area"/>
+        <result property="slab_3_start" column="slab_3_start_area"/>
+        <result property="slab_3_end" column="slab_3_end_area"/>
+    </resultMap>
+
     <resultMap id="ItemDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.Item.ItemDTO">
         <result property="imgUrl" column="imgUrl"/>
         <result property="itemName" column="itemName"/>
         <result property="itemPrice" column="itemPrice"/>
         <result property="itemPriceGST" column="itemPriceGST"/>
-        <result property="slab_1_discount" column="slab1Discount"/>
-        <result property="slab_2_discount" column="slab2Discount"/>
-        <result property="slab_3_discount" column="slab3Discount"/>
-        <result property="slab_1_start" column="slab1Start"/>
-        <result property="slab_1_end" column="slab1End"/>
-        <result property="slab_2_start" column="slab2Start"/>
-        <result property="slab_2_end" column="slab2End"/>
-        <result property="slab_3_start" column="slab3Start"/>
-        <result property="slab_3_end" column="slab3End"/>
+        <result property="slab_1_discount" column="slab_1_discount_default"/>
+        <result property="slab_2_discount" column="slab_2_discount_default"/>
+        <result property="slab_3_discount" column="slab_3_discount_default"/>
+        <result property="slab_1_start" column="slab_1_start_default"/>
+        <result property="slab_1_end" column="slab_1_end_default"/>
+        <result property="slab_2_start" column="slab_2_start_default"/>
+        <result property="slab_2_end" column="slab_2_end_default"/>
+        <result property="slab_3_start" column="slab_3_start_default"/>
+        <result property="slab_3_end" column="slab_3_end_default"/>
         <result property="brandId" column="brandId"/>
         <result property="categoryId" column="categoryId"/>
+        <collection property="areaWiseSlabData"
+                    ofType="com.odo.b2b.backend.ODO_B2B.model.Item.AreaWiseSlabData"
+                    resultMap="AreaWiseSlabMap"/>
     </resultMap>
 
     <resultMap id="ItemWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.Item.ItemWithID">
@@ -29,7 +46,36 @@
     </resultMap>
 
     <select id="getAllItemsOfBrand" parameterType="string" resultMap="ItemWithIdMap">
-        SELECT * from item where brandId = #{brandId}
+        select i.itemId,
+        i.imgUrl ,
+        i.itemName,
+        i.itemPrice,
+        i.itemPriceGST,
+        i.slab1Discount as slab_1_discount_default,
+        i.slab2Discount as slab_2_discount_default,
+        i.slab3Discount as slab_3_discount_default,
+        i.slab1Start as slab_1_start_default,
+        i.slab2Start as slab_2_start_default,
+        i.slab3Start as slab_3_start_default,
+        i.slab1End as slab_1_end_default,
+        i.slab2End as slab_2_end_default,
+        i.slab3End as slab_3_end_default,
+        i.slab3End as slab_3_end_default,
+        i.brandId,
+        i.categoryId,
+        asi.areaId,
+        asi.slab1Discount as slab_1_discount_area,
+        asi.slab2Discount as slab_2_discount_area,
+        asi.slab3Discount as slab_3_discount_area,
+        asi.slab1Start as slab_1_start_area,
+        asi.slab2Start as slab_2_start_area,
+        asi.slab3Start as slab_3_start_area,
+        asi.slab1End as slab_1_end_area,
+        asi.slab2End as slab_2_end_area,
+        asi.slab3End as slab_3_end_area,
+        a.areaName as areaName
+        from item i left join area_slab_item asi on i.itemId = asi.itemId left join area a on asi.areaId=a.areaId
+        where brandId=#{brandId}
     </select>
 
 

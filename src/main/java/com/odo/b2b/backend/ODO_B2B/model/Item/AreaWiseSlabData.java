@@ -21,4 +21,5 @@ public class AreaWiseSlabData {
     private double slab_3_discount;
     private double slab_3_start;
     private double slab_3_end;
+    private String areaName;
 }
