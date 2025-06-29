@@ -51,6 +51,16 @@
         )
     </insert>
 
+    <insert id="insertAreaSlabForItem" parameterType="map">
+        INSERT INTO area_slab_item (
+        itemId,areaId,slab1Discount, slab1Start, slab1End,slab2Discount, slab2Start, slab2End,slab3Discount, slab3Start,slab3End
+        ) VALUES (
+        #{itemId},#{areaId},#{slab_1_discount}, #{slab_1_start}, #{slab_1_end},
+        #{slab_2_discount}, #{slab_2_start}, #{slab_2_end},
+        #{slab_3_discount}, #{slab_3_start}, #{slab_3_end}
+        )
+    </insert>
+
     <update id="updateItem" parameterType="map">
         UPDATE item
         SET

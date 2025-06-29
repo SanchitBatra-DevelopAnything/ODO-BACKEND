@@ -95,34 +95,36 @@ CREATE TABLE item (
     CONSTRAINT fk_category FOREIGN KEY (categoryId) REFERENCES category(categoryId) ON DELETE SET NULL
 );
 
-CREATE TABLE cart (
-    cartId CHAR(36) PRIMARY KEY,
-    memberId CHAR(36) NOT NULL,
+CREATE TABLE area_slab_item (
+    id INT PRIMARY KEY AUTO_INCREMENT,  -- UUID format
 
-    CONSTRAINT fk_member
-        FOREIGN KEY (memberId)
-        REFERENCES member(memberId)
-        ON DELETE CASCADE
-);
-
-CREATE TABLE cart_item (
-    cartItemId CHAR(36) PRIMARY KEY,
-    cartId CHAR(36) NOT NULL,
     itemId CHAR(36) NOT NULL,
-    quantity INT NOT NULL,
-    price DOUBLE NOT NULL,
-    discountPercentage DOUBLE DEFAULT 0,
-    totalPriceAfterDiscount DOUBLE,
+    areaId CHAR(36),          -- Nullable, keep value even if area is deleted
 
-    CONSTRAINT fk_cart
-        FOREIGN KEY (cartId)
-        REFERENCES cart(cartId)
+    slab1Start DOUBLE,
+    slab1End DOUBLE,
+    slab1Discount DOUBLE,
+
+    slab2Start DOUBLE,
+    slab2End DOUBLE,
+    slab2Discount DOUBLE,
+
+    slab3Start DOUBLE,
+    slab3End DOUBLE,
+    slab3Discount DOUBLE,
+
+    -- Ensure 1 slab entry per item-area pair
+    UNIQUE (itemId, areaId),
+
+    -- Foreign key to item table with cascade delete
+    CONSTRAINT fk_areaSlabItem_item
+        FOREIGN KEY (itemId) REFERENCES item(itemId)
         ON DELETE CASCADE,
 
-    CONSTRAINT fk_item
-        FOREIGN KEY (itemId)
-        REFERENCES item(itemId)
-        ON DELETE CASCADE
+    -- Foreign key to area table, nullify areaId if area is deleted
+    CONSTRAINT fk_areaSlabItem_area
+        FOREIGN KEY (areaId) REFERENCES area(areaId)
+        ON DELETE SET NULL
 );
 
 

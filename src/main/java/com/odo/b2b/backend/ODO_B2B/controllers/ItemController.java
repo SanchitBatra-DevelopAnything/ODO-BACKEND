@@ -38,6 +38,7 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Map<String , String>> addItem(@RequestBody ItemDTO payload)
     {
+        System.out.println(payload);
         String id = itemService.addItem(payload);
         Map<String, String> response = new HashMap<>();
         response.put("name", id);

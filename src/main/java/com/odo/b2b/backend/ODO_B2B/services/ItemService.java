@@ -1,11 +1,13 @@
 package com.odo.b2b.backend.ODO_B2B.services;
 
 import com.odo.b2b.backend.ODO_B2B.mapper.ItemMapper;
+import com.odo.b2b.backend.ODO_B2B.model.Item.AreaWiseSlabData;
 import com.odo.b2b.backend.ODO_B2B.model.Item.ItemDTO;
 import com.odo.b2b.backend.ODO_B2B.model.Item.ItemWithID;
 import com.odo.b2b.backend.ODO_B2B.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +34,22 @@ public class ItemService {
     }
 
 
+    @Transactional
     public String addItem(ItemDTO itemDTO){
         String itemId = new UUIDGenerator().generateUUID();
         Map<String , Object> param = getItemParamMap(itemId , itemDTO);
         itemMapper.insertItem(param);
+        if(itemDTO.getAreaSlabs()!=null && itemDTO.getAreaSlabs().size()!=0)
+        {
+            //area wise slabs are given for this item , hence add it.
+            for(String areaName : itemDTO.getAreaSlabs().keySet())
+            {
+                if(itemDTO.getAreaSlabs().get(areaName)!=null) {
+                    Map<String , Object> areaSlabParam = getAreaSlabParamMap(itemId , itemDTO.getAreaSlabs().get(areaName));
+                    itemMapper.insertAreaSlabForItem(areaSlabParam);
+                }
+            }
+        }
         return itemId;
     }
 
@@ -71,6 +85,23 @@ public class ItemService {
         param.put("brandId", itemDTO.getBrandId());
         param.put("categoryId" , itemDTO.getCategoryId());
 
+        return param;
+    }
+
+    private Map<String , Object> getAreaSlabParamMap(String itemId, AreaWiseSlabData itemDTO)
+    {
+        Map<String, Object> param = new HashMap<>();
+        param.put("itemId", itemId);
+        param.put("areaId" , itemDTO.getAreaId());
+        param.put("slab_1_discount", itemDTO.getSlab_1_discount());
+        param.put("slab_1_start", itemDTO.getSlab_1_start());
+        param.put("slab_1_end", itemDTO.getSlab_1_end());
+        param.put("slab_2_discount", itemDTO.getSlab_2_discount());
+        param.put("slab_2_start", itemDTO.getSlab_2_start());
+        param.put("slab_2_end", itemDTO.getSlab_2_end());
+        param.put("slab_3_discount", itemDTO.getSlab_3_discount());
+        param.put("slab_3_start", itemDTO.getSlab_3_start());
+        param.put("slab_3_end", itemDTO.getSlab_3_end());
         return param;
     }
 }
