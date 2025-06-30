@@ -19,14 +19,6 @@ CREATE TABLE Admin (
         ON UPDATE CASCADE
 );
 
---CART TABLE
-CREATE TABLE cart (
-    cartId CHAR(36) PRIMARY KEY,
-    memberId CHAR(36) UNIQUE, --1:1 releationship
-    CONSTRAINT fk_member_cart FOREIGN KEY (memberId) REFERENCES member(memberId)
-);
-
-
 
 -- Table 2: member_notification
 CREATE TABLE member_notification (
@@ -133,5 +125,36 @@ CREATE TABLE area_slab_item (
         FOREIGN KEY (areaId) REFERENCES area(areaId)
         ON DELETE SET NULL
 );
+
+
+--CART TABLE
+CREATE TABLE cart (
+    cartId CHAR(36) PRIMARY KEY,
+    memberId CHAR(36) UNIQUE, --1:1 releationship
+    CONSTRAINT fk_member_cart FOREIGN KEY (memberId) REFERENCES member(memberId)
+);
+
+CREATE TABLE cart_item (
+    cartItemId CHAR(36) PRIMARY KEY,
+    cartId CHAR(36),
+    discountPercentage DOUBLE,
+    id VARCHAR(255),
+    imageUrl TEXT,
+    parentBrandName VARCHAR(255),
+    price DOUBLE,
+    quantity INT,
+    slab1Discount DOUBLE,
+    slab2Discount DOUBLE,
+    slab3Discount DOUBLE,
+    slab1Start DOUBLE,
+    slab2Start DOUBLE,
+    slab3Start DOUBLE,
+    title VARCHAR(255),
+    totalPrice DOUBLE,
+    totalPriceAfterDiscount DOUBLE,
+    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cartId) REFERENCES cart(cartId)
+);
+
+
 
 
