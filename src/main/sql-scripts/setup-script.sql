@@ -126,12 +126,10 @@ CREATE TABLE area_slab_item (
         ON DELETE SET NULL
 );
 
-
---CART TABLE
 CREATE TABLE cart (
     cartId CHAR(36) PRIMARY KEY,
-    memberId CHAR(36) UNIQUE, --1:1 releationship
-    CONSTRAINT fk_member_cart FOREIGN KEY (memberId) REFERENCES member(memberId)
+    memberId CHAR(36) UNIQUE,
+    CONSTRAINT fk_member_cart FOREIGN KEY (memberId) REFERENCES member(memberId) ON DELETE CASCADE
 );
 
 CREATE TABLE cart_item (
@@ -152,7 +150,7 @@ CREATE TABLE cart_item (
     title VARCHAR(255),
     totalPrice DOUBLE,
     totalPriceAfterDiscount DOUBLE,
-    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cartId) REFERENCES cart(cartId)
+    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cartId) REFERENCES cart(cartId) on delete cascade
 );
 
 
