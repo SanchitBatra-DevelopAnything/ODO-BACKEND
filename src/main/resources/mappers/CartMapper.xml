@@ -1,25 +1,30 @@
-<mapper namespace="com.yourpackage.mapper.CartMapper">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.CartMapper">
 
     <select id="findCartIdByMemberId" resultType="string">
-        SELECT cart_id FROM cart WHERE member_id = #{memberId}
+        SELECT cartId FROM cart WHERE memberId = #{memberId}
     </select>
 
     <insert id="insertCart">
-        INSERT INTO cart (cart_id, member_id, cart_items)
+        INSERT INTO cart (cartId, memberId, cartItems)
         VALUES (#{cartId}, #{memberId}, CAST(#{cartItemsJson} AS JSON))
     </insert>
 
     <update id="updateCart">
-        UPDATE cart SET cart_items = CAST(#{cartItemsJson} AS JSON)
-        WHERE cart_id = #{cartId}
+        UPDATE cart SET cartItems = CAST(#{cartItemsJson} AS JSON)
+        WHERE cartId = #{cartId}
     </update>
 
     <delete id="deleteCartByMemberId">
-        DELETE FROM cart WHERE member_id = #{memberId}
+        DELETE FROM cart WHERE memberId = #{memberId}
     </delete>
 
     <select id="getCartByMemberId" resultType="com.yourpackage.model.CartEntity">
-        SELECT cart_id, member_id, cart_items FROM cart WHERE member_id = #{memberId}
+        SELECT cartId, memberId, cart_items FROM cart WHERE memberId = #{memberId}
     </select>
 
 </mapper>
