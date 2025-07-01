@@ -22,6 +22,9 @@ public class CartItem {
         private Double slab_1_start;
         private Double slab_2_start;
         private Double slab_3_start;
+        private Double slab_1_end;
+        private Double slab_2_end;
+        private Double slab_3_end;
         private String title;
         private Double totalPrice;
         private Double totalPriceAfterDiscount;
