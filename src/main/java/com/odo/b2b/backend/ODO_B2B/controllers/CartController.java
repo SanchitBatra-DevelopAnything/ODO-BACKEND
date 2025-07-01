@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/v1/cart")
+@CrossOrigin
 public class CartController {
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/save/{memberId}")
+    @PutMapping("/save/{memberId}")
     public ResponseEntity<String> saveCart(@PathVariable String memberId,
                                            @RequestBody SaveCartRequest request) {
         cartService.saveCart(memberId, request);

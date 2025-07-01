@@ -23,8 +23,8 @@
         DELETE FROM cart WHERE memberId = #{memberId}
     </delete>
 
-    <select id="getCartByMemberId" resultType="com.yourpackage.model.CartEntity">
-        SELECT cartId, memberId, cart_items FROM cart WHERE memberId = #{memberId}
+    <select id="getCartByMemberId" resultType="com.odo.b2b.backend.ODO_B2B.model.Cart.CartEntity">
+        SELECT cartId, memberId, cartItems FROM cart WHERE memberId = #{memberId}
     </select>
 
 </mapper>
