@@ -30,7 +30,12 @@ public class CartController {
     }
 
     @GetMapping("/get/{memberId}")
-    public ResponseEntity<List<CartItem>> getCart(@PathVariable String memberId) {
+    public ResponseEntity<Object> getCart(@PathVariable String memberId) {
+        List<CartItem> cart = cartService.getCart(memberId);
+        if(cart.size()==0)
+        {
+            return ResponseEntity.ok("null");
+        }
         return ResponseEntity.ok(cartService.getCart(memberId));
     }
 }

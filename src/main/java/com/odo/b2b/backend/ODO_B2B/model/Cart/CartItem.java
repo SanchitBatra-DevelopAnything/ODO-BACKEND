@@ -1,5 +1,6 @@
 package com.odo.b2b.backend.ODO_B2B.model.Cart;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
