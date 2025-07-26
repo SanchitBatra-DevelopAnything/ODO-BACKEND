@@ -32,6 +32,7 @@ public class ItemDTO {
 
     private String brandId;
     private String categoryId;
+    private String itemDetails;
 
     //for reading request
     private Map<String,AreaWiseSlabData> areaSlabs;

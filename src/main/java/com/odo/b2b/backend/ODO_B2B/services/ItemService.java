@@ -121,6 +121,7 @@ public class ItemService {
 
         param.put("brandId", itemDTO.getBrandId());
         param.put("categoryId" , itemDTO.getCategoryId());
+        param.put("itemDetails" , itemDTO.getItemDetails());
 
         return param;
     }

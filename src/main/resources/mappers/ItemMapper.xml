@@ -35,6 +35,7 @@
         <result property="slab_3_end" column="slab_3_end_default"/>
         <result property="brandId" column="brandId"/>
         <result property="categoryId" column="categoryId"/>
+        <result property="itemDetails" column="itemDetails"/>
         <collection property="areaWiseSlabData"
                     ofType="com.odo.b2b.backend.ODO_B2B.model.Item.AreaWiseSlabData"
                     resultMap="AreaWiseSlabMap"/>
@@ -63,6 +64,7 @@
         i.slab3End as slab_3_end_default,
         i.brandId,
         i.categoryId,
+        i.ItemDetails as itemDetails,
         asi.areaId,
         asi.slab1Discount as slab_1_discount_area,
         asi.slab2Discount as slab_2_discount_area,
@@ -87,13 +89,13 @@
         slab1Discount, slab1Start, slab1End,
         slab2Discount, slab2Start, slab2End,
         slab3Discount, slab3Start, slab3End,
-        brandId,categoryId
+        brandId,categoryId,itemDetails
         ) VALUES (
         #{itemId}, #{imgUrl}, #{itemName}, #{itemPrice}, #{itemPriceGST},
         #{slab_1_discount}, #{slab_1_start}, #{slab_1_end},
         #{slab_2_discount}, #{slab_2_start}, #{slab_2_end},
         #{slab_3_discount}, #{slab_3_start}, #{slab_3_end},
-        #{brandId},#{categoryId}
+        #{brandId},#{categoryId},#{itemDetails}
         )
     </insert>
 
@@ -124,7 +126,8 @@
         slab3Start = #{slab_3_start},
         slab3End = #{slab_3_end},
         brandId = #{brandId},
-        categoryId = #{categoryId}
+        categoryId = #{categoryId},
+        itemDetails = #{itemDetails}
         WHERE
         itemId = #{itemId}
     </update>
