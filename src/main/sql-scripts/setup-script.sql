@@ -19,6 +19,26 @@ CREATE TABLE Admin (
         ON UPDATE CASCADE
 );
 
+CREATE TABLE orders (
+    orderId CHAR(36) PRIMARY KEY, -- UUID
+    gst VARCHAR(50),
+    area VARCHAR(100),
+    contact VARCHAR(15),
+    deliveryLatitude VARCHAR(100),
+    deliveryLongitude VARCHAR(100),
+    deviceToken TEXT,
+    items JSON,
+    orderDate DATE,
+    orderTime DATETIME,
+    orderedBy VARCHAR(500),
+    shop VARCHAR(500),
+    shopAddress VARCHAR(5000),
+    totalPrice DECIMAL(10, 2),
+    totalPriceAfterDiscount DECIMAL(10, 2),
+    statusCode CHAR(1) CHECK (statusCode IN ('A', 'P'))
+);
+
+
 
 -- Table 2: member_notification
 CREATE TABLE member_notification (
