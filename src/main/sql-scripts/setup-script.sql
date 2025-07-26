@@ -139,6 +139,9 @@ CREATE TABLE B2BBanners (
     imageUrl TEXT
 );
 
+ALTER TABLE Item
+ADD COLUMN ItemDetails VARCHAR(5000);
+
 
 
 
