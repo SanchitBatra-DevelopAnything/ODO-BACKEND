@@ -133,6 +133,12 @@ CREATE TABLE cart (
     CONSTRAINT fk_member_cart FOREIGN KEY (memberId) REFERENCES member(memberId) ON DELETE CASCADE
 );
 
+CREATE TABLE B2BBanners (
+    bannerId CHAR(36) NOT NULL PRIMARY KEY,
+    bannerName VARCHAR(255) NOT NULL,
+    imageUrl TEXT
+);
+
 
 
 
