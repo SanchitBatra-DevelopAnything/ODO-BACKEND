@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.odo.b2b.backend.ODO_B2B.mapper.B2BBannerMapper">
+
+    <resultMap id="B2BBannerDTOMap" type="com.odo.b2b.backend.ODO_B2B.model.B2BBanner.B2BBannerDTO">
+        <result property="bannerName" column="bannerName"/>
+        <result property="imageUrl" column="imageUrl"/>
+    </resultMap>
+
+    <resultMap id="B2BBannersWithIdMap" type="com.odo.b2b.backend.ODO_B2B.model.B2BBanner.B2BBannerWithID">
+        <id property="id" column="bannerId"/>
+        <association property="B2BBanner" resultMap="B2BBannerDTOMap"/>
+    </resultMap>
+
+    <select id="getAllBannersWithId" resultMap="B2BBannersWithIdMap">
+        SELECT bannerId, bannerName , imageUrl FROM B2BBanners
+    </select>
+
+    <delete id="deleteB2BBannerById" parameterType="string">
+        DELETE FROM B2BBanners WHERE bannerId = #{bannerId}
+    </delete>
+
+    <insert id="insertB2BBanner">
+        INSERT INTO B2BBanners (bannerid , bannerName , imageUrl)
+        VALUES (#{id}, #{bannerName} , #{imageUrl})
+    </insert>
+
+</mapper>
