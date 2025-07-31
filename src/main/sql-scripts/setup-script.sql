@@ -2,19 +2,19 @@ create database ODO;
 use ODO;
 
 -- Table: Area
-CREATE TABLE Area (
+CREATE TABLE area (
     areaId CHAR(36) PRIMARY KEY,
     areaName VARCHAR(100) NOT NULL
 );
 
 -- Table: Admin
-CREATE TABLE Admin (
+CREATE TABLE admin (
     adminId CHAR(36) PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     type VARCHAR(50),
     areaId CHAR(36),
-    FOREIGN KEY (areaId) REFERENCES Area(areaId)
+    FOREIGN KEY (areaId) REFERENCES area(areaId)
         ON DELETE SET NULL
         ON UPDATE CASCADE
 );
@@ -52,7 +52,7 @@ CREATE TABLE member_notification (
     deviceToken TEXT,
     latitude VARCHAR(50),
     longitude VARCHAR(50),
-    FOREIGN KEY (areaId) REFERENCES Area(areaId)
+    FOREIGN KEY (areaId) REFERENCES area(areaId)
         ON DELETE SET NULL
         ON UPDATE CASCADE
 );
@@ -159,7 +159,7 @@ CREATE TABLE B2BBanners (
     imageUrl TEXT
 );
 
-ALTER TABLE Item
+ALTER TABLE item
 ADD COLUMN ItemDetails VARCHAR(5000);
 
 
