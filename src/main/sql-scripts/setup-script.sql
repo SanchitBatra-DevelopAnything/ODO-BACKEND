@@ -29,7 +29,7 @@ CREATE TABLE orders (
     deviceToken TEXT,
     items JSON,
     orderDate DATE,
-    orderTime DATETIME,
+    orderTime VARCHAR(1000),
     orderedBy VARCHAR(500),
     shop VARCHAR(500),
     shopAddress VARCHAR(5000),

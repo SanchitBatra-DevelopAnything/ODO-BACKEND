@@ -33,4 +33,5 @@ public class OrderDTO {
     private Double totalPrice;
     private Double totalPriceAfterDiscount;
     private Character orderStatus;
+    private String itemsJSON;
 }
