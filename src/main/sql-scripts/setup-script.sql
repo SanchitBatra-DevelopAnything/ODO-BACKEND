@@ -32,7 +32,7 @@ CREATE TABLE orders (
     orderTime VARCHAR(1000),
     orderedBy VARCHAR(500),
     shop VARCHAR(500),
-    shopAddress VARCHAR(5000),
+    shopAddress TEXT,
     totalPrice DECIMAL(10, 2),
     totalPriceAfterDiscount DECIMAL(10, 2),
     statusCode CHAR(1) CHECK (statusCode IN ('A', 'P'))
