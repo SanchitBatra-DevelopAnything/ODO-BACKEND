@@ -45,8 +45,8 @@ CREATE TABLE orders (
 CREATE TABLE referrer (
     referrerId CHAR(36) PRIMARY KEY,
     referrerName VARCHAR(200),
-    referrerMobileNumber VARCHAR(10),
-    totalReferrals INT DEFAULT 0
+    contact VARCHAR(10),
+    referrals INT DEFAULT 0
 );
 
 
