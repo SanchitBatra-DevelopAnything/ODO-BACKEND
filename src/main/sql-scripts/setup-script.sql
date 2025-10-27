@@ -42,6 +42,15 @@ CREATE TABLE orders (
 
 
 
+CREATE TABLE referrer (
+    referrerId CHAR(36) PRIMARY KEY,
+    referrerName VARCHAR(200),
+    referrerMobileNumber VARCHAR(10),
+    totalReferrals INT DEFAULT 0
+);
+
+
+
 -- Table 2: member_notification
 CREATE TABLE member_notification (
     notificationId CHAR(36) PRIMARY KEY,
