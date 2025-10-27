@@ -19,6 +19,8 @@ CREATE TABLE admin (
         ON UPDATE CASCADE
 );
 
+insert into admin values('-OIRma3hOoRVvv_Ymnbb' , 'odo-admin' , 'odo@admin@123' , 'Super' , NULL);
+
 CREATE TABLE orders (
     orderId CHAR(36) PRIMARY KEY, -- UUID
     gst VARCHAR(50),

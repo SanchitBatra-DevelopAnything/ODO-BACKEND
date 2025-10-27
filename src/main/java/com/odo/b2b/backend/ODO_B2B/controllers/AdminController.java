@@ -24,7 +24,7 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String , String>> addSuAdmin(@RequestBody AdminDTO payload) {
+    public ResponseEntity<Map<String , String>> addSubAdmin(@RequestBody AdminDTO payload) {
         String id = adminService.addSubAdmin(payload);
         Map<String, String> response = new HashMap<>();
         response.put("name", id);
